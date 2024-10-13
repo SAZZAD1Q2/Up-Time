@@ -19,10 +19,23 @@ app.createServer = () => {
 
 app.handleReqRes = (req, res) => {
     const parsedUrl = url.parse(req.url, true);
-    res.end('jhkkHell00o Taj Mia')
     const path = parsedUrl.pathname;
     const trimmedPath = path.replace(/[\s,.!?]+/g, '')
-    console.log(trimmedPath);
+    const method = req.method.toLowerCase();
+    const queryStringObject = parsedUrl.query;
+    const headerObject = req.headers;
+    console.log(path)
+    const decoder = new StringDecoder('utf-8');
+    let realData = '';
+    req.on('data', (buffer) => {
+        realData += decoder.write(buffer);
+    });
+    req.on('end',() => {
+        realData += decoder.end();
+        console.log(realData);
+        res.end('Hello endings')
+    })
+    
     // const parsedUrl = url.parse(req.url, true);
     // const path = parsedUrl.pathname;
     // const method = req.method.toLowerCase();
