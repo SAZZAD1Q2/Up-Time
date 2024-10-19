@@ -1,5 +1,8 @@
-const { routeHandler } = require("./handlers/routehandler/sampleHandler");
+const sampleHandler = require("./handlers/routehandler/sampleHandler");
+const notFoundHandler = require("./handlers/routehandler/notFoundHandler");
+
 const route = {
-  sample: routeHandler,
+  sample: sampleHandler.sampleHandler,
 };
+
 module.exports = route;
